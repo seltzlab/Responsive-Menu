@@ -129,14 +129,19 @@
 	
 	//function to create options in the select menu
 	function createOption($item, $container, text){
+		// check for valid href attribute
+		var href = var href = $item.find('a:first').attr('href');
+	        if (!href) {
+	            href = '#';
+	        }
+	        
+	        //if no text param is passed, use list item's text, otherwise use settings.groupPageText
+	        if(!text){
+	            $('<option value="' + href + '">'+$.trim(getText($item))+'</option>').appendTo($container);
+	        } else {
+	            $('<option value="' + href + '">'+text+'</option>').appendTo($container);
+	        }
 		
-		//if no text param is passed, use list item's text, otherwise use settings.groupPageText
-		if(!text){
-			$('<option value="'+$item.find('a:first').attr('href')+'">'+$.trim(getText($item))+'</option>').appendTo($container);
-		} else {
-			$('<option value="'+$item.find('a:first').attr('href')+'">'+text+'</option>').appendTo($container);
-		}
-	
 	}//createOption()
 	
 	
